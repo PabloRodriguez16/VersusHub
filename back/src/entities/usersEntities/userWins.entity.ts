@@ -1,4 +1,10 @@
-import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { User } from './user.entity';
 import { Games } from '../Others/games.entity';
@@ -12,7 +18,7 @@ export class UserWins {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @ManyToOne(() => Games, (games) => games.userWins)
+  @ManyToMany(() => Games, (games) => games.userWins)
   @JoinColumn({ name: 'game_id' })
   game: Games;
 }

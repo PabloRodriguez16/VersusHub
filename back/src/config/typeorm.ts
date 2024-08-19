@@ -23,7 +23,7 @@ const config = {
   logging: ['error'],
   migrationsRun: true,
   synchronize: true,
-  // dropSchema: true,
+  dropSchema: true,
 };
 
 export default registerAs('typeorm', () => config);

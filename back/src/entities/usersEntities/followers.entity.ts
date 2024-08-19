@@ -10,4 +10,8 @@ export class Followers {
   @ManyToOne(() => User, (user) => user.followers)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @ManyToOne(() => User, (user) => user.following)
+  @JoinColumn({ name: 'following_id' })
+  following: User;
 }
