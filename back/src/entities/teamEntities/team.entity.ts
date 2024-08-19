@@ -19,8 +19,12 @@ export class Team {
   @Column({ type: 'varchar', unique: true, nullable: false })
   name: string;
 
-  @Column({ type: 'varchar', nullable: false })
-  picture: string;
+  @Column({
+    type: 'varchar',
+    default:
+      'http://res.cloudinary.com/dacebahmf/image/upload/v1723706326/xw8ifmowdwkxfcwic7lk.png',
+  })
+  picture?: string;
 
   @Column({ type: 'enum', default: onTopTeam.NODATA, enum: onTopTeam })
   onTopTeam: onTopTeam;
@@ -31,7 +35,7 @@ export class Team {
   @OneToMany(() => User, (user) => user.team)
   users: User[];
 
-  @OneToOne(() => User, (user) => user.captain)
+  @OneToOne(() => User, (user) => user.isCaptain)
   @JoinColumn({ name: 'captain' })
   captain: User;
 }

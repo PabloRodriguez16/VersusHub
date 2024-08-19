@@ -2,6 +2,7 @@ import { tournamentStatus, tournamentType } from 'src/enum/tournament.enum';
 import {
   Column,
   Entity,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   OneToOne,
@@ -12,6 +13,7 @@ import { User } from '../usersEntities/user.entity';
 import { TournamentTeams } from './tournamentTeams.entity';
 import { TournamentParticipation } from './tournamentParticipation.entity';
 import { Matches } from './matches.entity';
+import { Games } from '../Others/games.entity';
 
 @Entity({ name: 'tournaments' })
 export class Tournament {
@@ -47,10 +49,7 @@ export class Tournament {
   @ManyToOne(() => User, (user) => user.tournaments)
   organizer: User;
 
-  @OneToMany(
-    () => TournamentTeams,
-    (tournamentTeams) => tournamentTeams.tournament,
-  )
+  @OneToMany(() => TournamentTeams, (team) => team.tournament)
   tournamentTeams: TournamentTeams[];
 
   @OneToMany(
@@ -58,6 +57,9 @@ export class Tournament {
     (participation) => participation.tournament,
   )
   participations: TournamentParticipation[];
+
+  @ManyToOne(() => Games, (game) => game.tournaments)
+  game: Games;
 
   @OneToMany(() => Matches, (matches) => matches.tournament)
   matches: Matches[];
